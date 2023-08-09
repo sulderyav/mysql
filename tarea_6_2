@@ -1,1 +1,36 @@
+const mysql = require("mysql2/promise");
+
+const createConnection = async (databaseName) => {
+    const connection = await mysql.createConnection({
+        host: "localhost",
+        user: "suldery",
+        password: "secret",
+        database: databaseName
+    });
+    return connection;
+};
+
+module.exports = {
+    conexionEmployee: async () => createConnection("employee"),
+    conexionInvoice: async () => createConnection("invoice"),
+    conexionMethods: async () => createConnection("methods"),
+    conexionSalaryEmployee: async () => createConnection("salaryemployee")
+};
+
+
+const mysqlConexion = require("./mysqlConexion");
+
+(async () => {
+    const employeeConnection = await mysqlConexion.conexionEmployee();
+    // Realiza consultas o acciones con la conexión a la base de datos "employee"
+    
+    const invoiceConnection = await mysqlConexion.conexionInvoice();
+    // Realiza consultas o acciones con la conexión a la base de datos "invoice"
+    
+    const methodsConnection = await mysqlConexion.conexionMethods();
+    // Realiza consultas o acciones con la conexión a la base de datos "methods"
+    
+    const salaryEmployeeConnection = await mysqlConexion.conexionSalaryEmployee();
+    // Realiza consultas o acciones con la conexión a la base de datos "salaryemployee"
+})();
 
